@@ -13,13 +13,13 @@ export default {
 			if (path === '' || path === 'favicon.ico' || path === 'robots.txt') {
 				return new Response(null, {
 					status: 204,
-					headers: { 'Cache-Control': 'no-store' },
+					headers: { 'Cache-Control': 'public, max-age=0, s-maxage=300' },
 				});
 			}
 
 			// Only accept a single short code in the path
 			if (path.includes('/')) {
-				return new Response('Link not found', { status: 404 });
+				return new Response('Link not found', { status: 404, headers: { 'Cache-Control': 'public, max-age=0, s-maxage=300' } });
 			}
 
 			// Decode Base62 to database ID
@@ -35,7 +35,7 @@ export default {
 			if (!row) {
 				return new Response('Link not found', {
 					status: 404,
-					headers: { 'Cache-Control': 'no-store' },
+					headers: { 'Cache-Control': 'public, max-age=0, s-maxage=300' },
 				});
 			}
 
