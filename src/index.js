@@ -2,7 +2,7 @@ import { isAuthorized } from './helper/authorized.js';
 import { encodeBase62, decodeBase62 } from './helper/base62.js';
 
 export default {
-	async fetch(request, env, ctx) {
+	async fetch(request, env) {
 		const url = new URL(request.url);
 
 		// 1. GET: Redirect short links
