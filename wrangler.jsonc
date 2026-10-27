@@ -24,7 +24,4 @@
 	},
 	"workers_dev": true,
 	"preview_urls": false,
-	"vars": {
-		"NODE_OPTIONS": "--trace-deprecation",
-	},
 }
