@@ -1,4 +1,4 @@
-const ALPHABET = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+const ALPHABET = 'aZ8mK2xQ5vN0bR7yT1cW9pD4hJ6sF3uLkEoGzXnYqVwAiCrBtHdUfMjPgIS';
 
 export function encodeBase62(value) {
 	let n = Number(value);
