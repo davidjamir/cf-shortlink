@@ -17,8 +17,8 @@ export default {
 				});
 			}
 
-			// Only accept a single short code in the path
-			if (path.includes('/')) {
+			// Only accept Base62 short codes (4-10 characters)
+			if (!/^[0-9a-zA-Z]{4,10}$/.test(path)) {
 				return new Response('Link not found', {
 					status: 404,
 					headers: { 'Cache-Control': 'public, max-age=31536000, s-maxage=31536000, immutable' },
