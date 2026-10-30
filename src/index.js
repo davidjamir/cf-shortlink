@@ -13,20 +13,26 @@ export default {
 			if (path === '' || path === 'favicon.ico' || path === 'robots.txt') {
 				return new Response(null, {
 					status: 204,
-					headers: { 'Cache-Control': 'public, max-age=0, s-maxage=300' },
+					headers: { 'Cache-Control': 'public, max-age=31536000, s-maxage=31536000, immutable' },
 				});
 			}
 
 			// Only accept a single short code in the path
 			if (path.includes('/')) {
-				return new Response('Link not found', { status: 404, headers: { 'Cache-Control': 'public, max-age=0, s-maxage=300' } });
+				return new Response('Link not found', {
+					status: 404,
+					headers: { 'Cache-Control': 'public, max-age=31536000, s-maxage=31536000, immutable' },
+				});
 			}
 
 			// Decode Base62 to database ID
 			const id = decodeBase62(path);
 
 			if (id === null || id < 1) {
-				return new Response('Link not found', { status: 404 });
+				return new Response('Link not found', {
+					status: 404,
+					headers: { 'Cache-Control': 'public, max-age=31536000, s-maxage=31536000, immutable' },
+				});
 			}
 
 			// Query D1 by ID
@@ -35,7 +41,7 @@ export default {
 			if (!row) {
 				return new Response('Link not found', {
 					status: 404,
-					headers: { 'Cache-Control': 'public, max-age=0, s-maxage=300' },
+					headers: { 'Cache-Control': 'public, max-age=0, s-maxage=600' },
 				});
 			}
 
@@ -44,7 +50,7 @@ export default {
 				status: 301,
 				headers: {
 					Location: row.long_url,
-					'Cache-Control': 'public, max-age=0, s-maxage=31536000, immutable',
+					'Cache-Control': 'public, max-age=31536000, s-maxage=31536000, immutable',
 				},
 			});
 		}
